@@ -1,1 +1,1 @@
-web: heroku run python3 manage.py runserver
+web: gunicorn lineChatbot.wsgi:application --log-file - --log-level debug
