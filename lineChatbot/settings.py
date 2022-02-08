@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lineChatbot'
+    'django_chatbot'
     # 'django_chatbot.apps.DjangoChatbotConfig',
 ]
 
