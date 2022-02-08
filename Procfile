@@ -1,1 +1,1 @@
-web: gunicorn lineChatbot.wsgi
+web: heroku run python3 manage.py runserver
