@@ -9,10 +9,6 @@ from django.conf import settings
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
-import googlemaps
-
-gmaps = googlemaps.Client(key = "AIzaSyBf6nAgSmnUyTue-XM2RQh7EIgzUXM535s")
-
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
