@@ -1,0 +1,4 @@
+Django==3.2.9
+line-bot-sdk==2.1.0
+gunicorn==20.1.0
+python_version ="3.9"
