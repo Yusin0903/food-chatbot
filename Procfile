@@ -1,1 +1,1 @@
-web: gunicorn lineChatbot.wsgi:application --log-file - --log-level debug
+web: gunicorn lineChatbot.wsgi:application 
