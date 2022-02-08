@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -129,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LINE_CHANNEL_ACCESS_TOKEN = 'syIZ4IIrR3XAiyR/3yEEHFKJrHn1DO5l7GPPxQhxE8fG2Y9YPKfLpT4vlwfufdyrXv98V9HDYPDlwLpq3kgz3nnnzH7wizkdsJXDQoaddUKUbIm5OkikbMJN5scyjBwNrDR2bJz1EevAiKxo7TfIxQdB04t89/1O/w1cDnyilFU='
 
 LINE_CHANNEL_SECRET = '18a8d463f3694c886b1a87bbca2bf391'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
