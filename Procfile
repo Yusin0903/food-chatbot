@@ -1,1 +1,1 @@
-web: gunicorn lineChatbot.wsgi:application 
+web: gunicorn --pythonpath lineChatbot lineChatbot.wsgi
