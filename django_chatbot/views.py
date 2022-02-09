@@ -37,6 +37,8 @@ def callback(request):
 
 
 def find_dinner(event):
-    
-    return event[1]+event[2]
+    if not isinstance(event, str):
+        return "打地址好嗎"
+    else:
+        return "爽吃"
     
