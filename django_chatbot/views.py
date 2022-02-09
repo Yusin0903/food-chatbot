@@ -1,3 +1,4 @@
+from selectors import EpollSelector
 from django.shortcuts import render
 
 # Create your views here.
@@ -26,19 +27,22 @@ def callback(request):
             return HttpResponseBadRequest()
 
         for event in events:
-            if isinstance(event, MessageEvent):  # 如果有訊息事件
+            if isinstance(event, str):# 如果有訊息事件
                 line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
                     TextSendMessage(text=find_dinner(event.message.text))
                 )
+            else:
+                line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    event.reply_token,
+                    TextSendMessage("打地址好嗎")
+                )
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
 
 
 def find_dinner(event):
-    if not isinstance(event, str):
-        return "打地址好嗎"
-    else:
-        return "爽吃"
+    return "志宗的狗"
     
