@@ -28,7 +28,7 @@ def callback(request):
 
         for event in events:
             if isinstance(event, MessageEvent):# 如果有訊息事件
-                if "冰冰" in event.message:
+                if "冰冰" in event.message.text:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage(text=find_dinner(event.message.text))
