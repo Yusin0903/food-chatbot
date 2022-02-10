@@ -47,13 +47,19 @@ def callback(request):
                             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
                         )
                     )
-                    
-                    
                         
                 elif "學姐" in event.message.text:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage("不要叫我學姐，叫我冰冰姐"),
+                        ImageSendMessage(
+                            original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
+                            preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
+                        )
+                    )
+                elif "阿冰" in event.message.text:
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
                         ImageSendMessage(
                             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
                             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
