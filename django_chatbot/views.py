@@ -38,6 +38,18 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage("請叫我小冰冰")
                     )
+                elif "學姊" in event.message.text:
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
+                        TextSendMessage("不要叫我學姊，叫我冰冰姐")
+                    )
+                elif "學姐" in event.message.text:
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
+                        TextSendMessage("不要叫我學姐，叫我冰冰姐")
+                    )
+
+
 
         return HttpResponse()
     else:
