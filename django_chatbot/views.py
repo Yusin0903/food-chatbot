@@ -33,7 +33,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=find_dinner(event.message.text))
                     )
-                else:
+                elif "小小兵" in event.message.text:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage("請叫我小冰冰")
