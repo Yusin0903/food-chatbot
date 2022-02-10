@@ -42,6 +42,9 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage("不要叫我學姊，叫我冰冰姐www"),
+                    )
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
                         ImageSendMessage(
                             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
                             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
@@ -52,6 +55,9 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage("不要叫我學姐，叫我冰冰姐"),
+                    )
+                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
                         ImageSendMessage(
                             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
                             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
