@@ -32,7 +32,7 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         # TextSendMessage(text=find_dinner(event.message.text))
-                        AudioSendMessage(original_content_url = "https://www.dropbox.com/s/6m5mjnybykpevlv/%E5%86%B0%E5%86%B0.mp3?dl=0")
+                        AudioSendMessage(type ="audio", original_content_url = "https://dl.dropbox.com/s/6m5mjnybykpevlv/%E5%86%B0%E5%86%B0.mp3?dl=0", duration=2000)
                     )
                 elif "小小兵" in event.message.text:
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
