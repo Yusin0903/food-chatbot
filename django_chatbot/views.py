@@ -1,4 +1,5 @@
 from selectors import EpollSelector
+from unicodedata import category
 from django.shortcuts import render
 
 # Create your views here.
@@ -38,22 +39,30 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         # TextSendMessage(text=find_dinner(event.message.text))
-                        TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
+                        TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區。例如：台南市,台南市北區，冰冰將會幫你挑選目前有營業的餐廳！！如要尋找最新餐廳或人氣餐廳，請依照此方式。例如：台南市北區-人氣 台北市信義區-最新。")
                     )
                 for i in city:
                     if i in event.message.text:
+                        all = event.message.text.split("-")
+                        if len(all)<2:
+                            city =i
+                            area = event.message.text.lstrip(i)
+                            category = ""
+                        else:
+                            if all[1] == "人氣":
+                                ciry = i
+                                area = all[0].lstrip(i)
+                                category = "&sortby=rating"
+                            elif all[1] == "最新":
+                                ciry = i
+                                area = all[0].lstrip(i)
+                                category = "&sortby=recent"
+
                         city = i
                         area = event.message.text.lstrip(i)
                         line_bot_api.reply_message(
                             event.reply_token,
                             TextMessage(text = scrapecity(city, area))
-                        )
-                
-                val = scrapearea(event.message.text)
-                if val:
-                    line_bot_api.reply_message(
-                            event.reply_token,
-                            TextMessage(text = scrapearea(event.message.text))
                         )
                     
         return HttpResponse()
@@ -64,11 +73,11 @@ def callback(request):
 def find_dinner(event):
     return "你好我是冰冰www"
 
-def scrapecity(city, area):
+def scrapecity(city, area, category):
         if city and area:
-            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true"
+            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true" + category
         elif city:
-             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true"
+             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true" + category
 
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -81,28 +90,4 @@ def scrapecity(city, area):
         index = random.randint(0, len(ans))
         return ans[index]
 
-def scrapecityarea(area):
-        url= "https://ifoodie.tw/explore/" + area + "/list?opening=true"
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, "html.parser")
-        cards =  soup.find＿all(
-            "div", {"class": "jsx-3292609844 restaurant-info"})
 
-        ans = []
-        for card in cards:
-            ans.append(card.text)
-        index = random.randint(0, len(ans))
-        return ans[index]
-
-def scrapearea(area):
-    url= "https://ifoodie.tw/explore/list?opening=true&poi=" + area
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-    cards =  soup.find＿all(
-            "div", {"class": "jsx-3081451459 restaurant-info"})
-
-    ans = []
-    for card in cards:
-        ans.append(card.text)
-    index = random.randint(0, len(ans))
-    return ans[index]
