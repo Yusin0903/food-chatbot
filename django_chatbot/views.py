@@ -10,8 +10,9 @@ from django.conf import settings
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
-
-from crawl import *
+import random
+import requests
+from bs4 import BeautifulSoup
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
@@ -42,12 +43,12 @@ def callback(request):
                     )
                 elif "台南市" in event.message.text:
                     reply_arr = []
-                    value = crawl.Food(event.text)
                     # reply_arr.append(TextMessage("小妞炒飯"))
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextMessage(text = value.scrape())
+                        TextMessage(text = scrape(event.message))
                     )
+                    
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
@@ -55,4 +56,16 @@ def callback(request):
 
 def find_dinner(event):
     return "你好我是冰冰www"
-    
+
+def scrape(self):
+        url= "https://ifoodie.tw/explore/" + self.area + "/list?opening=true"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        cards =  soup.find＿all(
+            "div", {"class": "jsx-3292609844 restaurant-info"})
+
+        ans = []
+        for card in cards:
+            ans.append(card.text)
+        index = random.randint(0, len(ans))
+        return ans[index]
