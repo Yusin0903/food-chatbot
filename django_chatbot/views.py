@@ -42,10 +42,13 @@ def callback(request):
                     )
                 for i in city:
                     if i in event.message.text:
+                        city = i
+                        area = event.message.text.lstrip(i)
                         line_bot_api.reply_message(
                             event.reply_token,
-                            TextMessage(text = scrapecity(event.message.text))
+                            TextMessage(text = scrapecity(city, area))
                         )
+                
                 val = scrapearea(event.message.text)
                 if val:
                     line_bot_api.reply_message(
@@ -61,7 +64,24 @@ def callback(request):
 def find_dinner(event):
     return "你好我是冰冰www"
 
-def scrapecity(area):
+def scrapecity(city, area):
+        if city and area:
+            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true"
+        elif city:
+             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true"
+
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        cards =  soup.find＿all(
+            "div", {"class": "jsx-3292609844 restaurant-info"})
+
+        ans = []
+        for card in cards:
+            ans.append(card.text)
+        index = random.randint(0, len(ans))
+        return ans[index]
+
+def scrapecityarea(area):
         url= "https://ifoodie.tw/explore/" + area + "/list?opening=true"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")

@@ -1,42 +1,38 @@
+import requests
+import random
+from bs4 import BeautifulSoup
+def scrapearea(area):
+    url= "https://ifoodie.tw/explore/list?opening=true&poi=" + area
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    cards =  soup.find＿all(
+            "div", {"class": "jsx-3292609844 restaurant-info"})
 
-from .crawl import crawl
-a = crawl.Food("台南市")
-print(a.scrape())
-# elif "小小兵" in event.message.text:
-                #     line_bot_api.reply_message(  # 回復傳入的訊息文字
-                #         event.reply_token,
-                #         TextSendMessage("請叫我小冰冰www")
-                #     )
-                # elif "學姊" in event.message.text:
-                #     reply_arr =[]
-                #     reply_arr.append(TextSendMessage("不要叫我學姊，叫我冰冰姊"))
-                #     reply_arr.append(ImageSendMessage(
-                #             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
-                #             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
-                #         ))
-                #     line_bot_api.reply_message(  # 回復傳入的訊息文字
-                #         event.reply_token,
-                #         reply_arr
-                #     )
-                        
-                # elif "學姐" in event.message.text:
-                #     reply_arr =[]
-                #     reply_arr.append(TextSendMessage("不要叫我學姐，叫我冰冰姐"))
-                #     reply_arr.append(ImageSendMessage(
-                #             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
-                #             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
-                #         ))
-                #     line_bot_api.reply_message(  # 回復傳入的訊息文字
-                #         event.reply_token,
-                #         reply_arr
-                #     )
-                    
-                # elif "阿冰" in event.message.text:
-                #     line_bot_api.reply_message(  # 回復傳入的訊息文字
-                #         event.reply_token,
-                #         ImageSendMessage(
-                #             original_content_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg",
-                #             preview_image_url="https://img.ltn.com.tw/Upload/ent/page/800/2021/02/25/phpXzdxxD.jpg"
-                #         )
-                #     )
-                   
+    ans = []
+    for card in cards:
+        ans.append(card.text)
+    index = random.randint(0, len(ans))
+    return ans
+def scrapecity(city, area):
+        if city and area:
+            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true"
+        elif city:
+             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true"
+
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        cards =  soup.find＿all(
+            "div", {"class": "jsx-3292609844 restaurant-info"})
+
+        ans = []
+        for card in cards:
+            ans.append(card.text)
+        index = random.randint(0, len(ans))
+        return ans[index]
+a = "台南市東區"
+b = "台南市"
+c = a.lstrip(b)
+val = scrapecity(b,c)
+print(val)
+if not val :
+    print("yes")
