@@ -45,7 +45,7 @@ def callback(request):
                     # reply_arr.append(TextMessage("小妞炒飯"))
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextMessage(text = scrape(event.message))
+                        TextMessage(text = scrape(event.message.text))
                     )
                     
         return HttpResponse()
