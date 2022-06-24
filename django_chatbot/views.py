@@ -50,11 +50,11 @@ def callback(request):
                             category = ""
                         else:
                             if all[1] == "人氣":
-                                ciry = i
+                                city = i
                                 area = all[0].lstrip(i)
                                 category = "&sortby=rating"
                             elif all[1] == "最新":
-                                ciry = i
+                                city = i
                                 area = all[0].lstrip(i)
                                 category = "&sortby=recent"
                         line_bot_api.reply_message(
