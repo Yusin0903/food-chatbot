@@ -38,7 +38,7 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         # TextSendMessage(text=find_dinner(event.message.text))
-                        TextMessage("您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
+                        TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
                     )
                 elif "台南市" in event.message.text:
                     reply_arr = []
