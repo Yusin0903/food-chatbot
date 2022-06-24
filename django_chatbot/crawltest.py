@@ -13,11 +13,11 @@ def scrapearea(area):
         ans.append(card.text)
     index = random.randint(0, len(ans))
     return ans
-def scrapecity(city, area):
+def scrapecity(city, area,category):
         if city and area:
-            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true"
+            url= "https://ifoodie.tw/explore/" + city+ "/"+ area + "/list?opening=true"+ category
         elif city:
-             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true"
+             url= "https://ifoodie.tw/explore/" + city+ "/list?opening=true"+ category
 
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -29,10 +29,12 @@ def scrapecity(city, area):
             ans.append(card.text)
         index = random.randint(0, len(ans))
         return ans[index]
-a = "台南市東區"
+a = "台南市東區-人氣"
 b = "台南市"
-c = a.lstrip(b)
-val = scrapecity(b,c)
+c = a.split("-")
+d = c[0].lstrip(b)
+category = "&sortby=recent"
+val = scrapecity(b,d,category)
 print(val)
 if not val :
     print("yes")

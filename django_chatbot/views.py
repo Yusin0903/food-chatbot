@@ -57,9 +57,6 @@ def callback(request):
                                 ciry = i
                                 area = all[0].lstrip(i)
                                 category = "&sortby=recent"
-
-                        city = i
-                        area = event.message.text.lstrip(i)
                         line_bot_api.reply_message(
                             event.reply_token,
                             TextMessage(text = scrapecity(city, area, category))
