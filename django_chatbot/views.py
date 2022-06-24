@@ -40,13 +40,17 @@ def callback(request):
                         # TextSendMessage(text=find_dinner(event.message.text))
                         TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
                     )
-                else:
-                    for i in city:
-                        if i in event.message.text:
-                            line_bot_api.reply_message(
-                                event.reply_token,
-                                TextMessage(text = scrape(event.message.text))
-                            )
+                for i in city:
+                    if i in event.message.text:
+                        line_bot_api.reply_message(
+                            event.reply_token,
+                            TextMessage(text = scrapecity(event.message.text))
+                        )
+                if scrapearea(event.message.text)!=None:
+                    line_bot_api.reply_message(
+                            event.reply_token,
+                            TextMessage(text = scrapearea(event.message.text))
+                        )
                     
         return HttpResponse()
     else:
@@ -56,7 +60,7 @@ def callback(request):
 def find_dinner(event):
     return "你好我是冰冰www"
 
-def scrape(area):
+def scrapecity(area):
         url= "https://ifoodie.tw/explore/" + area + "/list?opening=true"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -68,3 +72,16 @@ def scrape(area):
             ans.append(card.text)
         index = random.randint(0, len(ans))
         return ans[index]
+
+def scrapearea(area):
+    url= "https://ifoodie.tw/explore/list?opening=true&poi=" + area
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    cards =  soup.find＿all(
+            "div", {"class": "jsx-3081451459 restaurant-info"})
+
+    ans = []
+    for card in cards:
+        ans.append(card.text)
+    index = random.randint(0, len(ans))
+    return ans[index]
