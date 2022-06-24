@@ -28,7 +28,7 @@ def callback(request):
             return HttpResponseForbidden()
         except LineBotApiError:
             return HttpResponseBadRequest()
-
+        city = ["台北市","新北市","桃園市","新竹市","新竹縣","苗栗縣","台中市","南投縣","雲林縣","雲林市","嘉義縣","嘉義市","台南市","高雄市","屏東縣","屏東市","花蓮縣","台東縣","宜蘭縣","蘭嶼","綠島"]
         for event in events:
 
             if isinstance(event, MessageEvent):# 如果有訊息事件
@@ -40,13 +40,13 @@ def callback(request):
                         # TextSendMessage(text=find_dinner(event.message.text))
                         TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
                     )
-                elif "台南市" in event.message.text:
-                    reply_arr = []
-                    # reply_arr.append(TextMessage("小妞炒飯"))
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextMessage(text = scrape(event.message.text))
-                    )
+                else:
+                    for i in city:
+                        if i in event.message.text:
+                            line_bot_api.reply_message(
+                                event.reply_token,
+                                TextMessage(text = scrape(event.message.text))
+                            )
                     
         return HttpResponse()
     else:
