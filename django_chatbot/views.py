@@ -46,7 +46,8 @@ def callback(request):
                             event.reply_token,
                             TextMessage(text = scrapecity(event.message.text))
                         )
-                if scrapearea(event.message.text)!=None:
+                val = scrapearea(event.message.text)
+                if val:
                     line_bot_api.reply_message(
                             event.reply_token,
                             TextMessage(text = scrapearea(event.message.text))
