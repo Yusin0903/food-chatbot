@@ -62,7 +62,7 @@ def callback(request):
                         area = event.message.text.lstrip(i)
                         line_bot_api.reply_message(
                             event.reply_token,
-                            TextMessage(text = scrapecity(city, area))
+                            TextMessage(text = scrapecity(city, area, category))
                         )
                     
         return HttpResponse()
