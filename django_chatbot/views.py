@@ -33,9 +33,8 @@ def callback(request):
 
             if isinstance(event, MessageEvent):# 如果有訊息事件
                 if "冰冰" in event.message.text:
-                    reply_arr =[]
+                    # reply_arr =[]
                     # reply_arr.append(AudioSendMessage(original_content_url = "https://dl.dropbox.com/s/6m5mjnybykpevlv/%E5%86%B0%E5%86%B0.mp3?dl=0", duration=2000))
-                    reply_arr.append(TextMessage("您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區"))
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         # TextSendMessage(text=find_dinner(event.message.text))
@@ -57,8 +56,8 @@ def callback(request):
 def find_dinner(event):
     return "你好我是冰冰www"
 
-def scrape(self):
-        url= "https://ifoodie.tw/explore/" + self.area + "/list?opening=true"
+def scrape(area):
+        url= "https://ifoodie.tw/explore/" + area + "/list?opening=true"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
         cards =  soup.find＿all(
