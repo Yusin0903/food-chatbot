@@ -10,8 +10,6 @@ from django.conf import settings
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
-import sys
-sys.path.append("/Users/zyusin/side_project/lineChatbot/django_chatbot")
 import crawl
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -41,7 +39,7 @@ def callback(request):
                         # TextSendMessage(text=find_dinner(event.message.text))
                         TextMessage("您好我是冰冰，請輸入您要選擇吃飯的城市以及地區 例如：台南市,台南市北區")
                     )
-                if "台南市" in event.message.text:
+                elif "台南市" in event.message.text:
                     reply_arr = []
                     value = crawl.Food(event.text)
                     # reply_arr.append(TextMessage("小妞炒飯"))
