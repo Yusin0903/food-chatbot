@@ -42,6 +42,12 @@ def callback(request):
                         # TextSendMessage(text=find_dinner(event.message.text))
                         TextMessage(text = "您好我是冰冰，請輸入您要選擇吃飯的城市以及地區。例如：台南市,台南市北區，冰冰將會幫你挑選目前有營業的餐廳！！如要尋找最新餐廳或人氣餐廳，請依照此方式。例如：台南市北區-人氣 台北市信義區-最新。")
                     )
+                if "台東縣東河鄉" in event.message.text:
+                    idx = random.randint(0, len(eastriver))
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextMessage(text = eastriver[idx])
+                    )
                 for i in city:
                     if i in event.message.text:
                         all = event.message.text.split("-")
@@ -62,12 +68,7 @@ def callback(request):
                             event.reply_token,
                             TextMessage(text = scrapecity(city, area, category))
                         )
-                if "東河" in event.message.text:
-                    idx = random.randint(0, len(eastriver))
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextMessage(text = eastriver[idx])
-                    )
+                
 
                     
         return HttpResponse()
