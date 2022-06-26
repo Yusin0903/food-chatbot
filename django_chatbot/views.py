@@ -30,6 +30,7 @@ def callback(request):
         except LineBotApiError:
             return HttpResponseBadRequest()
         city = ["台北市","新北市","桃園市","新竹市","新竹縣","苗栗縣","台中市","南投縣","雲林縣","雲林市","嘉義縣","嘉義市","台南市","高雄市","屏東縣","屏東市","花蓮縣","台東縣","宜蘭縣","蘭嶼","綠島"]
+        eastriver =["幸福食堂","都蘭小房子","貴煮良食","小鐵匠廚房","舊街東河包子","東河包子","洛恩米薩克","興文小吃","哇哇哇大骨麵","源發餐廳"]
         for event in events:
 
             if isinstance(event, MessageEvent):# 如果有訊息事件
@@ -61,6 +62,13 @@ def callback(request):
                             event.reply_token,
                             TextMessage(text = scrapecity(city, area, category))
                         )
+                if "東河" in event.message.text:
+                    idx = random.randint(0, len(eastriver))
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextMessage(text = eastriver[idx])
+                    )
+
                     
         return HttpResponse()
     else:
