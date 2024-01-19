@@ -11,7 +11,6 @@ def scrapearea(area):
     ans = []
     for card in cards:
         ans.append(card.text)
-    index = random.randint(0, len(ans))
     return ans
 def scrapecity(city, area,category):
         if city and area:
