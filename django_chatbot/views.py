@@ -10,7 +10,6 @@ from django.conf import settings
 
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import *
 import random
 import requests
 from bs4 import BeautifulSoup
