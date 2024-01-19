@@ -59,19 +59,19 @@ def handle_city_search(event, city):
             handle_city_search_details(event, i)
 
 def handle_city_search_details(event, city):
-    all_info = event.message.text.split("-")
-    if len(all_info) < 2:
+    info_parts = event.message.text.split("-")
+    if len(info_parts) < 2:
         city_name = city
         area = event.message.text.lstrip(city_name)
         category = ""
     else:
-        if all_info[1] == "人氣":
+        if info_parts[1] == "人氣":
             city_name = city
-            area = all_info[0].lstrip(city_name)
+            area = info_parts[0].lstrip(city_name)
             category = "&sortby=rating"
-        elif all_info[1] == "最新":
+        elif info_parts[1] == "最新":
             city_name = city
-            area = all_info[0].lstrip(city_name)
+            area = info_parts[0].lstrip(city_name)
             category = "&sortby=recent"
 
     reply_text = scrapecity(city_name, area, category)
